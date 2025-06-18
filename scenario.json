@@ -558,7 +558,7 @@
       "character": "src/assets/images/target_company.png",
       "speaker": "不動産会社担当者",
       "text": "申し訳ありませんが、このお取引はリスクが高いと判断せざるを得ません。社内でも相談したところ、進めることは難しいとの結論に至りました。",
-      "next": "company_failed",
+      "next": "company_calls_security",
       "narration": "src/assets/narration/company_very_suspicious.mp3"
     },
     {

@@ -33,7 +33,7 @@ const game = {
     // シナリオデータをロード
     async loadScenario() {
         try {
-            const response = await fetch('scenario.json');
+            const response = await fetch('scenario_with_narration.json');
             if (!response.ok) {
                 throw new Error('シナリオデータのロードに失敗しました');
             }
@@ -63,15 +63,16 @@ const game = {
     
     // ゲームオーバー判定
     checkGameOver() {
-        // リスクが95%以上の場合、確率的に逮捕
-        if (this.playerState.risk >= 95) {
+        // リスク値による自動ゲームオーバーを一時的に無効化
+        /*
+        if (this.playerState.risk >= 85) {
             return "ending_arrested";
         }
         
-        // 所持金が0以下の場合、破産エンド
         if (this.playerState.money <= 0) {
             return "abort_plan";
         }
+        */
         
         return null; // ゲームオーバーでない
     },
@@ -287,6 +288,8 @@ const game = {
     
     // シーンを表示
     showScene(sceneId) {
+        console.log(`シーン表示: ${sceneId}`); // デバッグ用ログ出力
+        
         // 特殊なシーンIDの処理
         if (sceneId === 'return_to_title') {
             this.returnToTitle();
@@ -300,6 +303,7 @@ const game = {
             return;
         }
         
+        console.log(`シーン読み込み: ${scene.id}, 選択肢: ${scene.choices ? scene.choices.length : 'なし'}`); // デバッグ用ログ出力
         this.currentScene = scene;
         
         // 既存のナレーションを停止
@@ -363,15 +367,38 @@ const game = {
         const choicesContainer = document.getElementById('choices-container');
         
         if (this.isChoiceMode) {
+            console.log(`選択肢表示モード: ${scene.id}, 選択肢数: ${scene.choices.length}`); // デバッグ用ログ出力
+            
             // 選択肢を表示
             choicesContainer.innerHTML = '';
             choicesContainer.style.display = 'flex';
             
-            scene.choices.forEach(choice => {
+            // ゲームオーバー画面の場合は特別に強調表示
+            if (scene.id === 'game_over') {
+                console.log('ゲームオーバー画面の選択肢を表示'); // デバッグ用ログ出力
+                choicesContainer.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
+                choicesContainer.style.borderColor = '#ff0000';
+                choicesContainer.style.padding = '20px';
+            }
+            
+            scene.choices.forEach((choice, index) => {
+                console.log(`選択肢${index+1}: ${choice.text} -> ${choice.next}`); // デバッグ用ログ出力
+                
                 const button = document.createElement('button');
                 button.className = 'choice-btn';
                 button.textContent = choice.text;
+                
+                // ゲームオーバー画面の選択肢の場合は特別なスタイル
+                if (scene.id === 'game_over') {
+                    button.style.fontSize = '18px';
+                    button.style.padding = '15px 25px';
+                    button.style.marginBottom = '10px';
+                    button.style.border = '2px solid #ff0000';
+                }
+                
                 button.addEventListener('click', () => {
+                    console.log(`選択肢クリック: ${choice.text} -> ${choice.next}`); // デバッグ用ログ出力
+                    
                     // 選択肢に効果があれば適用
                     if (choice.effects) {
                         this.updatePlayerState(choice.effects);
@@ -418,17 +445,22 @@ const game = {
     
     // 次のシーンへ
     nextScene() {
+        console.log(`次のシーンへ: 現在=${this.currentScene.id}, 選択肢モード=${this.isChoiceMode}, 次のシーン=${this.currentScene.next || 'なし'}`); // デバッグ用ログ出力
+        
         if (this.isChoiceMode || !this.currentScene.next) {
+            console.log('次のシーンに進めません: 選択肢モードか次のシーンがありません');
             return;
         }
         
         // ゲームオーバー判定
         const gameOverScene = this.checkGameOver();
         if (gameOverScene) {
+            console.log(`ゲームオーバー判定: ${gameOverScene}に移動`);
             this.showScene(gameOverScene);
             return;
         }
         
+        console.log(`通常の遷移: ${this.currentScene.next}に移動`);
         this.showScene(this.currentScene.next);
     }
 };
