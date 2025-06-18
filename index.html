@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>地面師詐欺シミュレーション 〜あなたは騙せるか？〜</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="game-container">
+        <div id="background"></div>
+        
+        <div id="character-container">
+            <img id="character" src="" alt="キャラクター" style="display: none;">
+        </div>
+        
+        <div id="text-box">
+            <div id="speaker">???</div>
+            <div id="dialog">...</div>
+        </div>
+        
+        <div id="choices-container" style="display: none;">
+            <!-- 選択肢はJavaScriptで動的に生成 -->
+        </div>
+        
+        <div id="stats-container">
+            <div class="stat-bar">
+                <label>リスク:</label>
+                <div class="bar-container">
+                    <div id="risk-bar" class="bar-fill"></div>
+                </div>
+                <span id="risk-value">0%</span>
+            </div>
+            <div class="stat-bar">
+                <label>信頼度:</label>
+                <div class="bar-container">
+                    <div id="trust-bar" class="bar-fill"></div>
+                </div>
+                <span id="trust-value">0%</span>
+            </div>
+            <div class="stat-item">
+                <label>資金:</label>
+                <span id="money-value">0万円</span>
+            </div>
+        </div>
+        
+        <div id="controls">
+            <button id="next-btn">次へ</button>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

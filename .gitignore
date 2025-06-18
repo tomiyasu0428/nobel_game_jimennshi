@@ -1,0 +1,38 @@
+# Dependency directories
+node_modules/
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Mac files
+.DS_Store
+
+# Credentials and keys
+*.pem
+*-client-*.json
+
+# Production build files
+/build
+/dist
+
+# Cache
+.npm
+.eslintcache
+.cache

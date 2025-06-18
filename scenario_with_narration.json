@@ -1,0 +1,820 @@
+{
+  "scenes": [
+    {
+      "id": "intro",
+      "background": "src/assets/images/city_background.jpg",
+      "character": "",
+      "speaker": "",
+      "text": "東京の不動産バブル。急騰する地価と慌ただしく行われる取引。そんな混乱の中、あなたは「地面師」として生計を立てようとしていた…",
+      "bgm": "src/assets/audio/intro_theme.mp3",
+      "next": "explain_jimenshi",
+      "narration": "src/assets/narration/intro.mp3"
+    },
+    {
+      "id": "explain_jimenshi",
+      "background": "src/assets/images/city_background.jpg",
+      "character": "",
+      "speaker": "",
+      "text": "「地面師」とは、他人の不動産を勝手に自分のものと偽り、騙して売却する詐欺師の俗称だ。偽造した権利書や印鑑証明を使い、時には共犯者と協力して巧妙に騙す。",
+      "next": "explain_warning",
+      "narration": "src/assets/narration/explain_jimenshi.mp3"
+    },
+    {
+      "id": "explain_warning",
+      "background": "src/assets/images/city_background.jpg",
+      "character": "",
+      "speaker": "",
+      "text": "※注意：このゲームは詐欺を防止する教育目的で作られています。実際に詐欺行為を行うことは重大な犯罪です。このゲームで得た知識を悪用してはいけません。",
+      "next": "mentor_appears",
+      "narration": "src/assets/narration/explain_warning.mp3"
+    },
+    {
+      "id": "mentor_appears",
+      "background": "src/assets/images/office_dark.jpg",
+      "character": "src/assets/images/mentor.png",
+      "speaker": "鬼頭",
+      "text": "よお、新人。俺が鬼頭だ。お前を地面師の世界に招待してやるよ。まずは基本を教えてやる。何でも聞いてくれ。",
+      "bgm": "src/assets/audio/mentor_theme.mp3",
+      "next": "mentor_explanation",
+      "narration": "src/assets/narration/mentor_appears.mp3"
+    },
+    {
+      "id": "mentor_explanation",
+      "background": "src/assets/images/office_dark.jpg",
+      "character": "src/assets/images/mentor.png",
+      "speaker": "鬼頭",
+      "text": "仕事の流れは簡単だ。ターゲット選び、情報集め、偽造書類の準備、接触、そして取引だ。まあ、大きな仕事ほどリスクも大きいがな。お前はどんなターゲットから始めたい？",
+      "next": "first_choice",
+      "narration": "src/assets/narration/mentor_explanation.mp3"
+    },
+    {
+      "id": "first_choice",
+      "background": "src/assets/images/office_dark.jpg",
+      "character": "src/assets/images/mentor.png",
+      "speaker": "鬼頭",
+      "text": "ターゲットを選べ。不動産会社は手堅いが儲けは少ない。個人投資家は高リスク高リターンだ。",
+      "choices": [
+        {
+          "text": "不動産会社をターゲットにする（安定・低リスク）",
+          "next": "choose_company",
+          "effects": {
+            "target": "company",
+            "risk": 10,
+            "trust": 5,
+            "flags": {
+              "targetCompany": true
+            }
+          }
+        },
+        {
+          "text": "個人投資家をターゲットにする（高額・高リスク）",
+          "next": "choose_individual",
+          "effects": {
+            "target": "individual",
+            "risk": 25,
+            "trust": 0,
+            "flags": {
+              "targetIndividual": true
+            }
+          }
+        }
+      ],
+      "narration": "src/assets/narration/first_choice.mp3"
+    },
+    {
+      "id": "choose_company",
+      "background": "src/assets/images/office_dark.jpg",
+      "character": "src/assets/images/mentor.png",
+      "speaker": "鬼頭",
+      "text": "堅実な選択だな。不動産会社は手続きに詳しいから、失敗のリスクは高いが、うまくいけば確実に金になる。次は準備だ。",
+      "bgm": "src/assets/audio/planning_theme.mp3",
+      "next": "prepare_documents_company",
+      "narration": "src/assets/narration/choose_company.mp3"
+    },
+    {
+      "id": "choose_individual",
+      "background": "src/assets/images/office_dark.jpg",
+      "character": "src/assets/images/mentor.png",
+      "speaker": "鬼頭",
+      "text": "野心的だな。個人投資家は儲けが大きいが、一か八かの勝負になる。警察の動きにも注意が必要だ。では、準備を始めよう。",
+      "bgm": "src/assets/audio/planning_theme.mp3",
+      "next": "prepare_documents_individual",
+      "narration": "src/assets/narration/choose_individual.mp3"
+    },
+    {
+      "id": "prepare_documents_company",
+      "background": "src/assets/images/document_room.jpg",
+      "character": "src/assets/images/mentor.png",
+      "speaker": "鬼頭",
+      "text": "不動産会社相手なら、完璧な偽造書類が必要だ。登記簿謄本、印鑑証明、本人確認書類…どれに力を入れる？",
+      "choices": [
+        {
+          "text": "登記簿謄本に力を入れる（会社は必ず確認する）",
+          "next": "document_registry",
+          "effects": {
+            "documents": [
+              "高品質な偽造登記簿謄本"
+            ],
+            "risk": 5,
+            "trust": 15,
+            "money": -20
+          }
+        },
+        {
+          "text": "印鑑証明書に力を入れる（本物そっくりに）",
+          "next": "document_seal",
+          "effects": {
+            "documents": [
+              "高品質な偽造印鑑証明書"
+            ],
+            "risk": 10,
+            "trust": 10,
+            "money": -15
+          }
+        },
+        {
+          "text": "身分証明書に力を入れる（本人確認を突破）",
+          "next": "document_id",
+          "effects": {
+            "documents": [
+              "高品質な偽造身分証明書"
+            ],
+            "risk": 15,
+            "trust": 5,
+            "money": -10
+          }
+        }
+      ],
+      "narration": "src/assets/narration/prepare_documents_company.mp3"
+    },
+    {
+      "id": "prepare_documents_individual",
+      "background": "src/assets/images/document_room.jpg",
+      "character": "src/assets/images/mentor.png",
+      "speaker": "鬼頭",
+      "text": "個人投資家相手なら、見栄えのいい書類と話術が大事だ。どの書類に力を入れる？",
+      "choices": [
+        {
+          "text": "物件資料に力を入れる（魅力的な投資物件に見せる）",
+          "next": "document_property",
+          "effects": {
+            "documents": [
+              "魅力的な偽造物件資料"
+            ],
+            "risk": 5,
+            "trust": 20,
+            "money": -20
+          }
+        },
+        {
+          "text": "収益予測資料に力を入れる（高利回りをアピール）",
+          "next": "document_profit",
+          "effects": {
+            "documents": [
+              "高利回りの偽造収益予測資料"
+            ],
+            "risk": 15,
+            "trust": 25,
+            "money": -15
+          }
+        },
+        {
+          "text": "低コストで済ませる（リスクは高いが初期投資を抑える）",
+          "next": "document_cheap",
+          "effects": {
+            "documents": [
+              "粗悪な偽造書類一式"
+            ],
+            "risk": 30,
+            "trust": -10,
+            "money": -5
+          }
+        }
+      ],
+      "narration": "src/assets/narration/prepare_documents_individual.mp3"
+    },
+    {
+      "id": "document_registry",
+      "background": "src/assets/images/document_room.jpg",
+      "character": "src/assets/images/mentor.png",
+      "speaker": "鬼頭",
+      "text": "登記簿に力を入れたか。いい選択だ。不動産会社は必ずここを重点的に確認する。次は共犯者を選ぼう。",
+      "next": "choose_accomplice_company",
+      "narration": "src/assets/narration/document_registry.mp3"
+    },
+    {
+      "id": "document_seal",
+      "background": "src/assets/images/document_room.jpg",
+      "character": "src/assets/images/mentor.png",
+      "speaker": "鬼頭",
+      "text": "印鑑証明書が本物そっくりなら信頼性が増すな。法務局で確認されなければ大丈夫だろう。次は共犯者を選ぼう。",
+      "next": "choose_accomplice_company",
+      "narration": "src/assets/narration/document_seal.mp3"
+    },
+    {
+      "id": "document_id",
+      "background": "src/assets/images/document_room.jpg",
+      "character": "src/assets/images/mentor.png",
+      "speaker": "鬼頭",
+      "text": "身分証に力を入れたか。本人確認は必ず行われるからな。ただし他の書類が粗いとバレるリスクがある。次は共犯者を選ぼう。",
+      "next": "choose_accomplice_company",
+      "narration": "src/assets/narration/document_id.mp3"
+    },
+    {
+      "id": "document_property",
+      "background": "src/assets/images/document_room.jpg",
+      "character": "src/assets/images/mentor.png",
+      "speaker": "鬼頭",
+      "text": "物件資料を魅力的に見せるのはいい戦略だ。投資家の目を引くことができる。次は共犯者を選ぼう。",
+      "next": "choose_accomplice_individual",
+      "narration": "src/assets/narration/document_property.mp3"
+    },
+    {
+      "id": "document_profit",
+      "background": "src/assets/images/document_room.jpg",
+      "character": "src/assets/images/mentor.png",
+      "speaker": "鬼頭",
+      "text": "高利回りの収益予測か。欲に目がくらむ投資家は多いからな。ただし、あまりに非現実的だと疑われるぞ。次は共犯者を選ぼう。",
+      "next": "choose_accomplice_individual",
+      "narration": "src/assets/narration/document_profit.mp3"
+    },
+    {
+      "id": "document_cheap",
+      "background": "src/assets/images/document_room.jpg",
+      "character": "src/assets/images/mentor.png",
+      "speaker": "鬼頭",
+      "text": "安上がりにしたか？リスキーだな。まあ、話術と運しだいだ。次は共犯者を選ぼう。",
+      "next": "choose_accomplice_individual",
+      "narration": "src/assets/narration/document_cheap.mp3"
+    },
+    {
+      "id": "choose_accomplice_company",
+      "background": "src/assets/images/bar.jpg",
+      "character": "src/assets/images/mentor.png",
+      "speaker": "鬼頭",
+      "text": "不動産会社相手なら信頼できる共犯者が必要だ。誰を雇う？",
+      "choices": [
+        {
+          "text": "元不動産業者（業界知識がある／高額）",
+          "next": "accomplice_ex_realtor",
+          "effects": {
+            "accomplices": [
+              "元不動産業者"
+            ],
+            "risk": -5,
+            "trust": 15,
+            "money": -30
+          }
+        },
+        {
+          "text": "腕の立つ詐欺師（経験豊富／中額）",
+          "next": "accomplice_scammer",
+          "effects": {
+            "accomplices": [
+              "ベテラン詐欺師"
+            ],
+            "risk": 0,
+            "trust": 10,
+            "money": -20
+          }
+        },
+        {
+          "text": "知り合いの素人（安価だが信頼性低い）",
+          "next": "accomplice_amateur",
+          "effects": {
+            "accomplices": [
+              "素人の知り合い"
+            ],
+            "risk": 20,
+            "trust": -5,
+            "money": -10
+          }
+        }
+      ],
+      "narration": "src/assets/narration/choose_accomplice_company.mp3"
+    },
+    {
+      "id": "choose_accomplice_individual",
+      "background": "src/assets/images/bar.jpg",
+      "character": "src/assets/images/mentor.png",
+      "speaker": "鬼頭",
+      "text": "個人投資家相手なら演技力のある共犯者が有効だ。誰を雇う？",
+      "choices": [
+        {
+          "text": "元役者（演技力抜群／高額）",
+          "next": "accomplice_actor",
+          "effects": {
+            "accomplices": [
+              "元役者"
+            ],
+            "risk": -5,
+            "trust": 20,
+            "money": -30
+          }
+        },
+        {
+          "text": "話の上手い詐欺師（説得力がある／中額）",
+          "next": "accomplice_talker",
+          "effects": {
+            "accomplices": [
+              "口のうまい詐欺師"
+            ],
+            "risk": 5,
+            "trust": 15,
+            "money": -20
+          }
+        },
+        {
+          "text": "共犯者なしで単独行動（リスク高いが低コスト）",
+          "next": "accomplice_solo",
+          "effects": {
+            "risk": 25,
+            "money": 0
+          }
+        }
+      ],
+      "narration": "src/assets/narration/choose_accomplice_individual.mp3"
+    },
+    {
+      "id": "accomplice_ex_realtor",
+      "background": "src/assets/images/bar.jpg",
+      "character": "src/assets/images/accomplice1.png",
+      "speaker": "元不動産業者",
+      "text": "業界の内部事情は熟知している。どんな質問にも答えられるし、専門用語も完璧だ。不動産会社の警戒心を解くことができるだろう。",
+      "next": "contact_phase_company",
+      "narration": "src/assets/narration/accomplice_ex_realtor.mp3"
+    },
+    {
+      "id": "accomplice_scammer",
+      "background": "src/assets/images/bar.jpg",
+      "character": "src/assets/images/accomplice2.png",
+      "speaker": "ベテラン詐欺師",
+      "text": "こういう仕事は何度もやってきた。相手の心理を読み、状況に応じた対応ができる。緊急事態にも冷静に対処できるぞ。",
+      "next": "contact_phase_company",
+      "narration": "src/assets/narration/accomplice_scammer.mp3"
+    },
+    {
+      "id": "accomplice_amateur",
+      "background": "src/assets/images/bar.jpg",
+      "character": "src/assets/images/accomplice3.png",
+      "speaker": "素人の知り合い",
+      "text": "あ、あの…頑張ります。指示通りにやれば大丈夫ですよね？緊張しますけど…",
+      "next": "contact_phase_company",
+      "narration": "src/assets/narration/accomplice_amateur.mp3"
+    },
+    {
+      "id": "accomplice_actor",
+      "background": "src/assets/images/bar.jpg",
+      "character": "src/assets/images/accomplice4.png",
+      "speaker": "元役者",
+      "text": "役作りは完璧です。本物の地主そのものになりきってみせましょう。臨機応変な演技も得意ですよ。",
+      "next": "contact_phase_individual",
+      "narration": "src/assets/narration/accomplice_actor.mp3"
+    },
+    {
+      "id": "accomplice_talker",
+      "background": "src/assets/images/bar.jpg",
+      "character": "src/assets/images/accomplice5.png",
+      "speaker": "口のうまい詐欺師",
+      "text": "話術なら誰にも負けないよ。投資家の心理を掴んで、夢を見せるのが得意でね。あっという間に信用させてみせるよ。",
+      "next": "contact_phase_individual",
+      "narration": "src/assets/narration/accomplice_talker.mp3"
+    },
+    {
+      "id": "accomplice_solo",
+      "background": "src/assets/images/bar.jpg",
+      "character": "src/assets/images/mentor.png",
+      "speaker": "鬼頭",
+      "text": "一人でやるのか？勇気あるな。まあ、報酬を分ける必要がないのはメリットだが、万が一の時にカバーしてくれる相手もいないってことだ。気をつけろよ。",
+      "next": "contact_phase_individual",
+      "narration": "src/assets/narration/accomplice_solo.mp3"
+    },
+    {
+      "id": "contact_phase_company",
+      "background": "src/assets/images/office_bright.jpg",
+      "character": "src/assets/images/target_company.png",
+      "speaker": "不動産会社担当者",
+      "text": "はじめまして。お問い合わせいただいた物件についてですね。資料を拝見させていただきましょうか。",
+      "bgm": "src/assets/audio/tension_theme.mp3",
+      "next": "contact_choice_company",
+      "narration": "src/assets/narration/contact_phase_company.mp3"
+    },
+    {
+      "id": "contact_phase_individual",
+      "background": "src/assets/images/cafe.jpg",
+      "character": "src/assets/images/target_individual.png",
+      "speaker": "個人投資家",
+      "text": "お会いできて光栄です。この物件には非常に興味があります。詳しいお話を聞かせていただけますか？",
+      "bgm": "src/assets/audio/tension_theme.mp3",
+      "next": "contact_choice_individual",
+      "narration": "src/assets/narration/contact_phase_individual.mp3"
+    },
+    {
+      "id": "contact_choice_company",
+      "background": "src/assets/images/office_bright.jpg",
+      "character": "src/assets/images/target_company.png",
+      "speaker": "不動産会社担当者",
+      "text": "この物件、とても魅力的ですね。ただ、いくつか確認させていただきたい点があります。",
+      "choices": [
+        {
+          "text": "事前に用意した書類をすべて見せる（オープンな姿勢）",
+          "next": "company_open_approach",
+          "effects": {
+            "risk": 15,
+            "trust": 10
+          }
+        },
+        {
+          "text": "必要最低限の書類だけ見せる（情報を制限）",
+          "next": "company_limited_approach",
+          "effects": {
+            "risk": 5,
+            "trust": -5
+          }
+        },
+        {
+          "text": "急いでいると急かす（プレッシャーをかける）",
+          "next": "company_pressure_approach",
+          "effects": {
+            "risk": 25,
+            "trust": -10
+          }
+        }
+      ],
+      "narration": "src/assets/narration/contact_choice_company.mp3"
+    },
+    {
+      "id": "contact_choice_individual",
+      "background": "src/assets/images/cafe.jpg",
+      "character": "src/assets/images/target_individual.png",
+      "speaker": "個人投資家",
+      "text": "物件の将来性について、もう少し詳しく教えていただけますか？投資判断の参考にしたいので。",
+      "choices": [
+        {
+          "text": "控えめな収益予測を示す（現実的に見せる）",
+          "next": "individual_modest_approach",
+          "effects": {
+            "risk": 0,
+            "trust": 15,
+            "money": -100
+          }
+        },
+        {
+          "text": "非常に高い収益を約束する（強気の姿勢）",
+          "next": "individual_aggressive_approach",
+          "effects": {
+            "risk": 20,
+            "trust": 5,
+            "money": 0
+          }
+        },
+        {
+          "text": "感情に訴える（希少な機会だと強調）",
+          "next": "individual_emotional_approach",
+          "effects": {
+            "risk": 10,
+            "trust": 10,
+            "money": -50
+          }
+        }
+      ],
+      "narration": "src/assets/narration/contact_choice_individual.mp3"
+    },
+    {
+      "id": "company_open_approach",
+      "background": "src/assets/images/office_bright.jpg",
+      "character": "src/assets/images/target_company.png",
+      "speaker": "不動産会社担当者",
+      "text": "ありがとうございます。非常に丁寧な資料ですね。では、法務部で詳細を確認させていただきます。少々お時間をいただけますか？",
+      "next": "company_check",
+      "narration": "src/assets/narration/company_open_approach.mp3"
+    },
+    {
+      "id": "company_limited_approach",
+      "background": "src/assets/images/office_bright.jpg",
+      "character": "src/assets/images/target_company.png",
+      "speaker": "不動産会社担当者",
+      "text": "なるほど。ただ、弊社の規定では追加の確認書類が必要になります。後日改めてご提出いただくことは可能でしょうか？",
+      "next": "company_suspicious",
+      "narration": "src/assets/narration/company_limited_approach.mp3"
+    },
+    {
+      "id": "company_pressure_approach",
+      "background": "src/assets/images/office_bright.jpg",
+      "character": "src/assets/images/target_company.png",
+      "speaker": "不動産会社担当者",
+      "text": "そんなにお急ぎとは…。大変申し訳ありませんが、適切な審査には時間がかかります。この案件、少し不審に思えてきました。",
+      "next": "company_very_suspicious",
+      "narration": "src/assets/narration/company_pressure_approach.mp3"
+    },
+    {
+      "id": "individual_modest_approach",
+      "background": "src/assets/images/cafe.jpg",
+      "character": "src/assets/images/target_individual.png",
+      "speaker": "個人投資家",
+      "text": "現実的な数字を示していただき感謝します。慎重な姿勢に好感が持てます。この物件、前向きに検討したいと思います。",
+      "next": "individual_interested",
+      "narration": "src/assets/narration/individual_modest_approach.mp3"
+    },
+    {
+      "id": "individual_aggressive_approach",
+      "background": "src/assets/images/cafe.jpg",
+      "character": "src/assets/images/target_individual.png",
+      "speaker": "個人投資家",
+      "text": "その収益率は…本当に実現可能なのでしょうか？少し疑問に思います。別の専門家にも相談してみたいのですが。",
+      "next": "individual_doubtful",
+      "narration": "src/assets/narration/individual_aggressive_approach.mp3"
+    },
+    {
+      "id": "individual_emotional_approach",
+      "background": "src/assets/images/cafe.jpg",
+      "character": "src/assets/images/target_individual.png",
+      "speaker": "個人投資家",
+      "text": "確かに魅力的な話です。ただ、急かされているような…。少し調査の時間をいただけませんか？",
+      "next": "individual_considering",
+      "narration": "src/assets/narration/individual_emotional_approach.mp3"
+    },
+    {
+      "id": "company_check",
+      "background": "src/assets/images/office_bright.jpg",
+      "character": "src/assets/images/target_company.png",
+      "speaker": "不動産会社担当者",
+      "text": "確認が終わりました。基本的には問題ないようですが、念のため登記情報を法務局でも確認したいと思います。",
+      "next": "company_final_choice",
+      "narration": "src/assets/narration/company_check.mp3"
+    },
+    {
+      "id": "company_suspicious",
+      "background": "src/assets/images/office_bright.jpg",
+      "character": "src/assets/images/target_company.png",
+      "speaker": "不動産会社担当者",
+      "text": "すみません、いくつか気になる点が出てきました。もう少し詳しい調査が必要そうです。",
+      "next": "company_final_choice",
+      "narration": "src/assets/narration/company_suspicious.mp3"
+    },
+    {
+      "id": "company_very_suspicious",
+      "background": "src/assets/images/office_bright.jpg",
+      "character": "src/assets/images/target_company.png",
+      "speaker": "不動産会社担当者",
+      "text": "申し訳ありませんが、このお取引はリスクが高いと判断せざるを得ません。社内でも相談したところ、進めることは難しいとの結論に至りました。",
+      "next": "company_failed",
+      "narration": "src/assets/narration/company_very_suspicious.mp3"
+    },
+    {
+      "id": "individual_interested",
+      "background": "src/assets/images/cafe.jpg",
+      "character": "src/assets/images/target_individual.png",
+      "speaker": "個人投資家",
+      "text": "では、契約に向けて進めましょう。ただ、念のため私の不動産アドバイザーにも相談しておきます。来週までに返事をしますね。",
+      "next": "individual_final_choice",
+      "narration": "src/assets/narration/individual_interested.mp3"
+    },
+    {
+      "id": "individual_doubtful",
+      "background": "src/assets/images/cafe.jpg",
+      "character": "src/assets/images/target_individual.png",
+      "speaker": "個人投資家",
+      "text": "あなたの話には矛盾を感じます。この物件、本当にあなたの所有なのですか？別の資料も見せていただけますか？",
+      "next": "individual_final_choice",
+      "narration": "src/assets/narration/individual_doubtful.mp3"
+    },
+    {
+      "id": "individual_considering",
+      "background": "src/assets/images/cafe.jpg",
+      "character": "src/assets/images/target_individual.png",
+      "speaker": "個人投資家",
+      "text": "少し考える時間をください。こういった決断は慎重にしたいので…。また連絡してもいいですか？",
+      "next": "individual_final_choice",
+      "narration": "src/assets/narration/individual_considering.mp3"
+    },
+    {
+      "id": "company_final_choice",
+      "background": "src/assets/images/office_bright.jpg",
+      "character": "",
+      "speaker": "",
+      "text": "不動産会社の対応に不安を感じ始めた。このまま進めるかどうか決断が必要だ。",
+      "bgm": "src/assets/audio/decision_theme.mp3",
+      "choices": [
+        {
+          "text": "計画を中止して撤退する（安全策）",
+          "next": "abort_plan",
+          "effects": {
+            "risk": -20
+          }
+        },
+        {
+          "text": "さらに説得を試みる（リスクを取る）",
+          "next": "continue_company_scam",
+          "effects": {
+            "risk": 20
+          }
+        },
+        {
+          "text": "急いで契約を迫る（危険な賭け）",
+          "next": "rush_company_deal",
+          "effects": {
+            "risk": 40
+          }
+        }
+      ],
+      "narration": "src/assets/narration/company_final_choice.mp3"
+    },
+    {
+      "id": "individual_final_choice",
+      "background": "src/assets/images/cafe.jpg",
+      "character": "",
+      "speaker": "",
+      "text": "投資家の反応を見て、次の一手を考える必要がある。",
+      "bgm": "src/assets/audio/decision_theme.mp3",
+      "choices": [
+        {
+          "text": "計画を中止して撤退する（安全策）",
+          "next": "abort_plan",
+          "effects": {
+            "risk": -20
+          }
+        },
+        {
+          "text": "別の角度から説得を試みる（リスクを取る）",
+          "next": "continue_individual_scam",
+          "effects": {
+            "risk": 20
+          }
+        },
+        {
+          "text": "今すぐ契約するよう圧力をかける（危険な賭け）",
+          "next": "rush_individual_deal",
+          "effects": {
+            "risk": 40
+          }
+        }
+      ],
+      "narration": "src/assets/narration/individual_final_choice.mp3"
+    },
+    {
+      "id": "abort_plan",
+      "background": "src/assets/images/park.jpg",
+      "character": "",
+      "speaker": "",
+      "text": "リスクが高すぎると判断し、計画を中止することにした。確かに儲けは逃したが、逮捕されるリスクも回避できた。",
+      "next": "ending_aborted",
+      "narration": "src/assets/narration/abort_plan.mp3"
+    },
+    {
+      "id": "continue_company_scam",
+      "background": "src/assets/images/office_bright.jpg",
+      "character": "src/assets/images/target_company.png",
+      "speaker": "不動産会社担当者",
+      "text": "追加の説明をいただき、理解しました。では契約に向けて進めましょう。最終確認のため、当社の法務部が改めて書類をチェックします。",
+      "effects": {
+        "risk": 10,
+        "trust": 5
+      },
+      "next": "company_check_documents",
+      "narration": "src/assets/narration/continue_company_scam.mp3"
+    },
+    {
+      "id": "rush_company_deal",
+      "background": "src/assets/images/office_bright.jpg",
+      "character": "src/assets/images/target_company.png",
+      "speaker": "不動産会社担当者",
+      "text": "そこまで急ぐ理由がわかりません。むしろ不審に思えてきました…。申し訳ありませんが、警備室を呼びますね。",
+      "effects": {
+        "risk": 40
+      },
+      "next": "company_calls_security",
+      "narration": "src/assets/narration/rush_company_deal.mp3"
+    },
+    {
+      "id": "continue_individual_scam",
+      "background": "src/assets/images/cafe.jpg",
+      "character": "src/assets/images/target_individual.png",
+      "speaker": "個人投資家",
+      "text": "なるほど、そういう背景があったのですね。理解できました。では、契約書を準備していただけますか？弁護士にも確認してもらいたいので。",
+      "effects": {
+        "risk": 10,
+        "trust": 10
+      },
+      "next": "individual_ready_to_deal",
+      "narration": "src/assets/narration/continue_individual_scam.mp3"
+    },
+    {
+      "id": "rush_individual_deal",
+      "background": "src/assets/images/cafe.jpg",
+      "character": "src/assets/images/target_individual.png",
+      "speaker": "個人投資家",
+      "text": "…ちょっと待ってください。なぜそこまで急ぐのですか？私の友人は警察官なのですが、相談してみたほうがいいでしょうか？",
+      "effects": {
+        "risk": 40
+      },
+      "next": "individual_calls_police",
+      "narration": "src/assets/narration/rush_individual_deal.mp3"
+    },
+    {
+      "id": "company_check_documents",
+      "background": "src/assets/images/office_bright.jpg",
+      "character": "src/assets/images/manager.png",
+      "speaker": "法務部長",
+      "text": "すみません、いくつかの書類に不審な点が見つかりました。本物の所有者に確認を取ったところ、あなたが所有者ではないという回答でした。説明していただけますか？",
+      "next": "company_busted",
+      "narration": "src/assets/narration/company_check_documents.mp3"
+    },
+    {
+      "id": "company_calls_security",
+      "background": "src/assets/images/office_bright.jpg",
+      "character": "src/assets/images/security.png",
+      "speaker": "警備員",
+      "text": "お客様、ちょっとお話を伺いたいことがあります。こちらへどうぞ。警察も呼んでありますので。",
+      "next": "ending_arrested",
+      "narration": "src/assets/narration/company_calls_security.mp3"
+    },
+    {
+      "id": "company_busted",
+      "background": "src/assets/images/office_bright.jpg",
+      "character": "src/assets/images/police.png",
+      "speaker": "警察官",
+      "text": "地面師の詐欺の疑いで逮捕します。あなたには黙秘権がありますが…",
+      "bgm": "src/assets/audio/ending_bad.mp3",
+      "next": "ending_arrested",
+      "narration": "src/assets/narration/company_busted.mp3"
+    },
+    {
+      "id": "individual_ready_to_deal",
+      "background": "src/assets/images/contract.jpg",
+      "character": "src/assets/images/target_individual.png",
+      "speaker": "個人投資家",
+      "text": "弁護士が確認したところ、登記情報に不審な点があるそうです。実は私、不動産登記に詳しい友人に調査も依頼していました…。",
+      "next": "individual_busted",
+      "narration": "src/assets/narration/individual_ready_to_deal.mp3"
+    },
+    {
+      "id": "individual_calls_police",
+      "background": "src/assets/images/cafe.jpg",
+      "character": "src/assets/images/police.png",
+      "speaker": "警察官",
+      "text": "警察です。不動産詐欺の疑いがありますので、事情聴取にご協力ください。",
+      "bgm": "src/assets/audio/ending_bad.mp3",
+      "next": "ending_arrested",
+      "narration": "src/assets/narration/individual_calls_police.mp3"
+    },
+    {
+      "id": "individual_busted",
+      "background": "src/assets/images/contract.jpg",
+      "character": "src/assets/images/police.png",
+      "speaker": "警察官",
+      "text": "動くな！詐欺の現行犯で逮捕する！",
+      "bgm": "src/assets/audio/ending_bad.mp3",
+      "next": "ending_arrested",
+      "narration": "src/assets/narration/individual_busted.mp3"
+    },
+    {
+      "id": "ending_aborted",
+      "background": "src/assets/images/park.jpg",
+      "character": "src/assets/images/mentor.png",
+      "speaker": "鬼頭",
+      "text": "引き際を知るのも大事な能力だ。今回は見送ったが、また次の機会もある。焦るな。詐欺は犯罪だ。普通に生きていくことを考えたほうがいいぞ。",
+      "bgm": "src/assets/audio/ending_neutral.mp3",
+      "next": "ending_lesson",
+      "narration": "src/assets/narration/ending_aborted.mp3"
+    },
+    {
+      "id": "ending_arrested",
+      "background": "src/assets/images/jail.jpg",
+      "character": "",
+      "speaker": "",
+      "text": "詐欺未遂の罪で逮捕された。裁判の結果、懲役3年の実刑判決を受けることになった。地面師の人生は、刑務所の中で終わりを告げた…。",
+      "next": "ending_lesson",
+      "narration": "src/assets/narration/ending_arrested.mp3"
+    },
+    {
+      "id": "ending_lesson",
+      "background": "src/assets/images/city_background.jpg",
+      "character": "",
+      "speaker": "",
+      "text": "【教訓】\n地面師詐欺は重大な犯罪です。被害者の人生を狂わせるだけでなく、自分自身も長期の懲役刑に処されます。不動産取引では正規の手続きと十分な調査が重要です。怪しい勧誘や急かす取引には注意しましょう。",
+      "bgm": "src/assets/audio/ending_theme.mp3",
+      "next": "game_over",
+      "narration": "src/assets/narration/ending_lesson.mp3"
+    },
+    {
+      "id": "game_over",
+      "background": "src/assets/images/city_background.jpg",
+      "character": "",
+      "speaker": "",
+      "text": "ゲームオーバー\n\nこのゲームは詐欺防止の教育目的で作られています。詐欺行為は犯罪です。不審な取引や急かされる契約には十分注意しましょう。",
+      "choices": [
+        {
+          "text": "もう一度プレイする",
+          "next": "intro",
+          "effects": {
+            "risk": -100,
+            "trust": -100,
+            "money": -100
+          }
+        }
+      ],
+      "narration": "src/assets/narration/game_over.mp3"
+    }
+  ]
+}
