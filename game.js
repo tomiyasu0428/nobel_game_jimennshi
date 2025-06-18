@@ -52,6 +52,21 @@ const game = {
         this.updateStatsDisplay();
     },
     
+    // ゲームオーバー判定
+    checkGameOver() {
+        // リスクが95%以上の場合、確率的に逮捕
+        if (this.playerState.risk >= 95) {
+            return "ending_arrested";
+        }
+        
+        // 所持金が0以下の場合、破産エンド
+        if (this.playerState.money <= 0) {
+            return "abort_plan";
+        }
+        
+        return null; // ゲームオーバーでない
+    },
+    
     // 状態表示を更新
     updateStatsDisplay() {
         // リスクゲージ更新
@@ -317,7 +332,15 @@ const game = {
                     if (choice.effects) {
                         this.updatePlayerState(choice.effects);
                     }
-                    this.showScene(choice.next);
+                    
+                    // ゲームオーバー判定
+                    const gameOverScene = this.checkGameOver();
+                    if (gameOverScene) {
+                        this.showScene(gameOverScene);
+                    } else {
+                        this.showScene(choice.next);
+                    }
+                    
                     choicesContainer.style.display = 'none';
                 });
                 choicesContainer.appendChild(button);
@@ -352,6 +375,13 @@ const game = {
     // 次のシーンへ
     nextScene() {
         if (this.isChoiceMode || !this.currentScene.next) {
+            return;
+        }
+        
+        // ゲームオーバー判定
+        const gameOverScene = this.checkGameOver();
+        if (gameOverScene) {
+            this.showScene(gameOverScene);
             return;
         }
         

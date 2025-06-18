@@ -659,7 +659,11 @@
       "speaker": "",
       "text": "リスクが高すぎると判断し、計画を中止することにした。確かに儲けは逃したが、逮捕されるリスクも回避できた。",
       "next": "ending_aborted",
-      "narration": "src/assets/narration/abort_plan.mp3"
+      "narration": "src/assets/narration/abort_plan.mp3",
+      "effects": {
+        "risk": -30,
+        "money": -10
+      }
     },
     {
       "id": "continue_company_scam",
@@ -718,7 +722,11 @@
       "speaker": "法務部長",
       "text": "すみません、いくつかの書類に不審な点が見つかりました。本物の所有者に確認を取ったところ、あなたが所有者ではないという回答でした。説明していただけますか？",
       "next": "company_busted",
-      "narration": "src/assets/narration/company_check_documents.mp3"
+      "narration": "src/assets/narration/company_check_documents.mp3",
+      "effects": {
+        "risk": 90,
+        "trust": -40
+      }
     },
     {
       "id": "company_calls_security",
@@ -727,7 +735,11 @@
       "speaker": "警備員",
       "text": "お客様、ちょっとお話を伺いたいことがあります。こちらへどうぞ。警察も呼んでありますので。",
       "next": "ending_arrested",
-      "narration": "src/assets/narration/company_calls_security.mp3"
+      "narration": "src/assets/narration/company_calls_security.mp3",
+      "effects": {
+        "risk": 90,
+        "trust": -60
+      }
     },
     {
       "id": "company_busted",
@@ -737,7 +749,11 @@
       "text": "地面師の詐欺の疑いで逮捕します。あなたには黙秘権がありますが…",
       "bgm": "src/assets/audio/ending_bad.mp3",
       "next": "ending_arrested",
-      "narration": "src/assets/narration/company_busted.mp3"
+      "narration": "src/assets/narration/company_busted.mp3",
+      "effects": {
+        "risk": 100,
+        "trust": -70
+      }
     },
     {
       "id": "individual_ready_to_deal",
@@ -746,7 +762,11 @@
       "speaker": "個人投資家",
       "text": "弁護士が確認したところ、登記情報に不審な点があるそうです。実は私、不動産登記に詳しい友人に調査も依頼していました…。",
       "next": "individual_busted",
-      "narration": "src/assets/narration/individual_ready_to_deal.mp3"
+      "narration": "src/assets/narration/individual_ready_to_deal.mp3",
+      "effects": {
+        "risk": 80,
+        "trust": -50
+      }
     },
     {
       "id": "individual_calls_police",
@@ -756,7 +776,11 @@
       "text": "警察です。不動産詐欺の疑いがありますので、事情聴取にご協力ください。",
       "bgm": "src/assets/audio/ending_bad.mp3",
       "next": "ending_arrested",
-      "narration": "src/assets/narration/individual_calls_police.mp3"
+      "narration": "src/assets/narration/individual_calls_police.mp3",
+      "effects": {
+        "risk": 95,
+        "trust": -60
+      }
     },
     {
       "id": "individual_busted",
@@ -766,7 +790,11 @@
       "text": "動くな！詐欺の現行犯で逮捕する！",
       "bgm": "src/assets/audio/ending_bad.mp3",
       "next": "ending_arrested",
-      "narration": "src/assets/narration/individual_busted.mp3"
+      "narration": "src/assets/narration/individual_busted.mp3",
+      "effects": {
+        "risk": 100,
+        "trust": -80
+      }
     },
     {
       "id": "ending_aborted",
@@ -776,7 +804,11 @@
       "text": "引き際を知るのも大事な能力だ。今回は見送ったが、また次の機会もある。焦るな。詐欺は犯罪だ。普通に生きていくことを考えたほうがいいぞ。",
       "bgm": "src/assets/audio/ending_neutral.mp3",
       "next": "ending_lesson",
-      "narration": "src/assets/narration/ending_aborted.mp3"
+      "narration": "src/assets/narration/ending_aborted.mp3",
+      "effects": {
+        "risk": -50,
+        "trust": 10
+      }
     },
     {
       "id": "ending_arrested",
@@ -785,7 +817,12 @@
       "speaker": "",
       "text": "詐欺未遂の罪で逮捕された。裁判の結果、懲役3年の実刑判決を受けることになった。地面師の人生は、刑務所の中で終わりを告げた…。",
       "next": "ending_lesson",
-      "narration": "src/assets/narration/ending_arrested.mp3"
+      "narration": "src/assets/narration/ending_arrested.mp3",
+      "effects": {
+        "risk": 100,
+        "trust": -100,
+        "money": -100
+      }
     },
     {
       "id": "ending_lesson",
