@@ -21,6 +21,15 @@ const game = {
         flags: {}         // 各種フラグ
     },
     
+    // タイトル画面の初期化
+    initTitleScreen() {
+        document.getElementById('start-btn').addEventListener('click', () => {
+            document.getElementById('title-screen').style.display = 'none';
+            document.getElementById('game-container').style.display = 'block';
+            this.loadScenario();
+        });
+    },
+    
     // シナリオデータをロード
     async loadScenario() {
         try {
@@ -394,8 +403,8 @@ let bgmAudio = null;
 
 // ゲーム開始時の処理
 document.addEventListener('DOMContentLoaded', () => {
-    // ゲーム初期化
-    game.loadScenario();
+    // タイトル画面の初期化
+    game.initTitleScreen();
     
     // 既存の「次へ」ボタンやシナリオロード処理
     document.getElementById('next-btn').addEventListener('click', () => {
