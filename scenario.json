@@ -849,6 +849,15 @@
             "trust": -100,
             "money": -100
           }
+        },
+        {
+          "text": "タイトル画面に戻る",
+          "next": "return_to_title",
+          "effects": {
+            "risk": -100,
+            "trust": -100,
+            "money": -100
+          }
         }
       ],
       "narration": "src/assets/narration/game_over.mp3"

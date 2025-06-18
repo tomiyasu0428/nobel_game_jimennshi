@@ -213,6 +213,35 @@ const game = {
         this.showScene('intro');
     },
     
+    // タイトル画面に戻る
+    returnToTitle() {
+        // BGMを停止
+        if (bgmAudio) {
+            bgmAudio.pause();
+            bgmAudio.currentTime = 0;
+        }
+        
+        // ナレーションを停止
+        if (this.currentNarration) {
+            window.speechSynthesis.cancel();
+            this.currentNarration = null;
+        }
+        
+        // カスタムナレーション音声を停止
+        if (this.currentNarrationAudio) {
+            this.currentNarrationAudio.pause();
+            this.currentNarrationAudio.currentTime = 0;
+            this.currentNarrationAudio = null;
+        }
+        
+        // ゲーム画面を非表示にし、タイトル画面を表示
+        document.getElementById('game-container').style.display = 'none';
+        document.getElementById('title-screen').style.display = 'flex';
+        
+        // プレイヤー状態をリセット
+        this.resetPlayerState();
+    },
+    
     // 状態更新（シーン選択によるステータスの変化）
     updatePlayerState(effects) {
         if (!effects) return;
@@ -258,6 +287,12 @@ const game = {
     
     // シーンを表示
     showScene(sceneId) {
+        // 特殊なシーンIDの処理
+        if (sceneId === 'return_to_title') {
+            this.returnToTitle();
+            return;
+        }
+        
         // シーンを検索
         const scene = this.scenario.scenes.find(scene => scene.id === sceneId);
         if (!scene) {
